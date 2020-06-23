@@ -1,0 +1,27 @@
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+    <div fxFlex fxFlexOffset="20px" class="form-size">
+        <h3>Register for a new Account</h3>
+
+        <form novalidate [formGroup]="registrationForm" #rform="ngForm" (ngSubmit)="onRegister()">
+    
+            <p>
+                <mat-form-field class="half-width">
+                    <input matInput formControlName="username" placeholder="Username" type="text" required>
+                    <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
+                </mat-form-field>
+                <mat-form-field class="half-width">
+                    <input matInput formControlName="password" placeholder="Password" type="password" required>
+                    <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
+                    <input matInput formControlName="email" placeholder="Email" type="email" required>
+                    <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
+                </mat-form-field>
+            </p>
+
+            <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="registrationForm.invalid">Register</button>
+        </form>
+    </div>
+</div>
