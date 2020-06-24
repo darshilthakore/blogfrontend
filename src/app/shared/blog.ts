@@ -2,6 +2,6 @@ export interface Blog {
     id: number;
     title: string;
     description: string;
-    imageUrl: string;
+    image_url: string;
     owner: string;
 }

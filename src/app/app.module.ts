@@ -27,6 +27,7 @@ import { UserService } from './services/user.service';
 import { TimelineComponent } from './timeline/timeline.component';
 import { from } from 'rxjs';
 import { NewblogComponent } from './newblog/newblog.component';
+import { UpdateblogComponent } from './updateblog/updateblog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NewblogComponent } from './newblog/newblog.component';
     RegisterComponent,
     HomeComponent,
     TimelineComponent,
-    NewblogComponent
+    NewblogComponent,
+    UpdateblogComponent
   ],
   imports: [
     BrowserModule,

@@ -2,24 +2,27 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Blog } from '../shared/blog';
 import { BlogService } from '../services/blog.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { switchMap, scan } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-newblog',
-  templateUrl: './newblog.component.html',
-  styleUrls: ['./newblog.component.scss']
+  selector: 'app-updateblog',
+  templateUrl: './updateblog.component.html',
+  styleUrls: ['./updateblog.component.scss']
 })
-export class NewblogComponent implements OnInit {
+export class UpdateblogComponent implements OnInit {
 
-  newblogForm: FormGroup;
-  newblog: Blog;
-  @ViewChild('blogform') newblogFormDirective;
+  updateblogForm: FormGroup;
+  blog: Blog;
+  blogcopy: Blog;
+  dummynblog: Blog;
+  @ViewChild('blogform') updateblogFormDirective;
 
 
   constructor(
-    private newblg: FormBuilder,
-    private newblogService: BlogService,
+    private updblg: FormBuilder,
+    private updateblogService: BlogService,
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
@@ -28,6 +31,7 @@ export class NewblogComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
   }
 
   formErrors = {
@@ -51,13 +55,18 @@ export class NewblogComponent implements OnInit {
 
 
   createForm(): void {
-    this.newblogForm = this.newblg.group({
-      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(64)] ],
-      description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(300)] ],
-      image_url: ['',],
+
+    this.route.params
+    .pipe(switchMap ((params: Params) => {return this.updateblogService.getBlog(params['id']); }))
+    .subscribe( blog => { this.blog = blog; this.blogcopy = blog;});
+
+    this.updateblogForm = this.updblg.group({
+      title: [this.blogcopy.title, [Validators.required, Validators.minLength(2), Validators.maxLength(64)] ],
+      description: [this.blogcopy.description, [Validators.required, Validators.minLength(2), Validators.maxLength(300)] ],
+      image_url: [this.blogcopy.image_url,],
     });
     
-    this.newblogForm.valueChanges
+    this.updateblogForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
@@ -65,34 +74,43 @@ export class NewblogComponent implements OnInit {
   }
 
 
-  createBlog() {
-    this.newblog = this.newblogForm.value;
-    console.log(this.newblog);
-    this.newblogForm.reset({
+  updateBlog() {
+    this.blogcopy = this.updateblogForm.value;
+    console.log(this.blogcopy);
+    this.updateblogForm.reset({
       title: '',
       image_url: '',
       description: '',
     });
-    this.newblogFormDirective.resetForm();
+    this.updateblogFormDirective.resetForm();
     var owner = localStorage.getItem('user');
-    this.newblog['owner'] = owner;
-    this.newblogService.createBlog(this.newblog)
+    this.blogcopy['owner'] = owner;
+    this.updateblogService.updateBlog(this.blogcopy.id, this.blogcopy)
     .subscribe(
       response => {
         console.log(response);
         // this.registration = registration
-        this.newblogService.mysubject.next("Blog created");
-        
+        // this.newblogService.mysubject.next("Blog created");
+              
       }
       
     );
+    this.router.navigate(['/timeline']);
     // this.router.navigate(['/timeline'])
 
   }
 
+  logoutClicked() {
+    // this.global.me = new User();
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('cartid');
+    this.router.navigate(['/user']);
+  }
+
   onValueChanged(data?: any) {
-    if (!this.newblogForm) { return; }
-    const form = this.newblogForm;
+    if (!this.updateblogForm) { return; }
+    const form = this.updateblogForm;
     for (const field in this.formErrors) {
       if (this.formErrors.hasOwnProperty(field)) {
         // clear previous error message (if any)
@@ -109,5 +127,4 @@ export class NewblogComponent implements OnInit {
       }
     }
   }
-
 }

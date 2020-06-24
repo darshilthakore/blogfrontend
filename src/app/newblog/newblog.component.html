@@ -14,7 +14,7 @@
     </p>
     <p>
         <mat-form-field class="full-width">
-            <input matInput formControlName="description" placeholder="Description" type="text" required>
+            <textarea matInput formControlName="description" placeholder="Description" rows="10" cols="100" required></textarea>
             <mat-error *ngIf="formErrors.description">{{formErrors.description}}</mat-error>
         </mat-form-field>
     </p>

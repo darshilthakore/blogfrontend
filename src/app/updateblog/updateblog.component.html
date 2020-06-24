@@ -1,0 +1,29 @@
+<mat-toolbar color="primary" position="fixed"> <span>My Blog</span>
+    <span class="flex-spacer"></span>
+    <button mat-raised-button (click)="logoutClicked()" id="logoutBtn" color="primary">LogOut</button>
+</mat-toolbar>
+
+
+<h2>Update Blog</h2>
+<div *ngIf="blog">
+    <form novalidate [formGroup]="updateblogForm" #blogform="ngForm" (ngSubmit)="updateBlog()">
+        <p>
+            <mat-form-field class="full-width">
+                <input matInput formControlName="title" placeholder="Title for the blog" type="text" required>
+                <mat-error *ngIf="formErrors.title">{{formErrors.title}}</mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <input matInput formControlName="image_url" placeholder="Provide an image URL" type="url" required>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="full-width">
+                <textarea matInput formControlName="description" placeholder="Description" rows="10" cols="100" required></textarea>
+                <mat-error *ngIf="formErrors.description">{{formErrors.description}}</mat-error>
+            </mat-form-field>
+        </p>
+        <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="updateblogForm.invalid">Update Blog</button>
+    </form>
+</div>

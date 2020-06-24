@@ -11,6 +11,7 @@ import { Blog } from '../shared/blog';
 export class TimelineComponent implements OnInit {
 
   blogs: Blog[];
+  user = "";
 
   constructor(
     private router: Router,
@@ -22,6 +23,13 @@ export class TimelineComponent implements OnInit {
     if ( localStorage.getItem('token') && localStorage.getItem('user')) {
       //this.global.me = JSON.parse(localStorage.getItem('user'));
       console.log("im in if cond on timeline.comp.ts")
+      this.user = localStorage.getItem('user');
+      this.blogService.mysubject.subscribe(
+        () => {
+          this.getBlogs();
+        }
+      );
+      
       this.getBlogs();
     } else {
       console.log("im in else cond on timeline.comp.ts")
@@ -39,6 +47,17 @@ export class TimelineComponent implements OnInit {
     );
 
   };
+
+  deleteBlog(id) {
+    console.log(id);
+    this.blogService.deleteBlog(id).subscribe(
+      response => {
+        console.log(response);
+        this.blogService.mysubject.next('Data changed');
+      }
+    );
+    
+  }
 
   logoutClicked() {
     // this.global.me = new User();
