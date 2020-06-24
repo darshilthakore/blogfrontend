@@ -5,7 +5,7 @@ import { TimelineComponent } from './timeline/timeline.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/user', pathMatch: 'full'},
+  { path: '', redirectTo: '/timeline', pathMatch: 'full'},
   { path: 'user', component: HomeComponent},
   { path: 'timeline', component: TimelineComponent},
 ];

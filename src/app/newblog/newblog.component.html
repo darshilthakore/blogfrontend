@@ -1,0 +1,22 @@
+<h2>Create a new Blog</h2>
+
+<form novalidate [formGroup]="newblogForm" #blogform="ngForm" (ngSubmit)="createBlog()">
+    <p>
+        <mat-form-field class="full-width">
+            <input matInput formControlName="title" placeholder="Title for the blog" type="text" required>
+            <mat-error *ngIf="formErrors.title">{{formErrors.title}}</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="full-width">
+            <input matInput formControlName="image_url" placeholder="Provide an image URL" type="url" required>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="full-width">
+            <input matInput formControlName="description" placeholder="Description" type="text" required>
+            <mat-error *ngIf="formErrors.description">{{formErrors.description}}</mat-error>
+        </mat-form-field>
+    </p>
+    <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="newblogForm.invalid">Create Blog</button>
+</form>

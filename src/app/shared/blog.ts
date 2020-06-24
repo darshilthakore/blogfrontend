@@ -3,4 +3,5 @@ export interface Blog {
     title: string;
     description: string;
     imageUrl: string;
+    owner: string;
 }

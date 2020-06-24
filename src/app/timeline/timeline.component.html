@@ -2,4 +2,50 @@
     <span class="flex-spacer"></span>
     <button mat-raised-button (click)="logoutClicked()" id="logoutBtn" color="primary">LogOut</button>
 </mat-toolbar>
-<p>timeline works!</p>
+
+<div class="newblog">
+    <app-newblog></app-newblog>
+</div>
+
+<div class="container"
+    fxLayout="column"
+    fxLayoutGap="10px">
+    <h2>Timeline</h2>
+    <div *ngFor="let blog of blogs">
+        <mat-card style="max-width: 50%;">
+                <mat-card-header>
+                    <mat-card-title matLine>{{blog.title}}</mat-card-title>
+                    <mat-card-subtitle matLine>by {{blog.owner}}</mat-card-subtitle>
+
+                </mat-card-header>
+                <mat-grid-list cols="3">
+                    
+                    <mat-grid-tile [rowspan]="1" [colspan]="2">
+                        <img src="{{blog.imageUrl}}" alt="image"> 
+                    </mat-grid-tile>
+                    <mat-grid-tile [rowspan]="1" [colspan]="1" >{{blog.description}}</mat-grid-tile>
+            </mat-grid-list>
+        </mat-card>
+    </div>
+
+    <!-- <mat-grid-list cols="1" rowHeight="2:1">
+        <mat-grid-tile *ngFor="let blog of blogs">
+            <div style="min-width: 50%; min-height: auto;">
+                <mat-grid-list cols="3">
+                    <mat-grid-tile [rowspan]="0.5" [colspan]="3" [style.background]="lightblue">
+                        {{blog.title}}
+                    </mat-grid-tile>
+                    <mat-grid-tile [rowspan]="1" [colspan]="2">
+                        <img src="{{blog.imageUrl}}" alt="image" [style.background]="lightgreen"> 
+                    </mat-grid-tile>
+                    <mat-grid-tile [rowspan]="1" [colspan]="1" [style.background]="lightpink">{{blog.description}}</mat-grid-tile>
+                </mat-grid-list>
+            </div>
+            
+            
+            
+        </mat-grid-tile>
+
+    </mat-grid-list> -->
+</div>
+

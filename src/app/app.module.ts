@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 
 import { baseURL } from './shared/baseurl';
 
@@ -24,6 +25,8 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { UserService } from './services/user.service';
 import { TimelineComponent } from './timeline/timeline.component';
+import { from } from 'rxjs';
+import { NewblogComponent } from './newblog/newblog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { TimelineComponent } from './timeline/timeline.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    TimelineComponent
+    TimelineComponent,
+    NewblogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,7 @@ import { TimelineComponent } from './timeline/timeline.component';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatCardModule,
   ],
   providers: [
     UserService,

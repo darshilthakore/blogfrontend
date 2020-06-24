@@ -23,7 +23,11 @@ export class BlogService {
 
 
     getBlogs(): Observable<Blog[]> {
-      return this.http.get<Blog[]>(baseURL + 'api/blogs', this.getAuthHeaders());
+      return this.http.get<Blog[]>(baseURL + 'api/blogs/', this.getAuthHeaders());
+    }
+
+    createBlog(blog: Blog): Observable<Blog> {
+      return this.http.post<Blog>(baseURL + 'api/blogs/', blog, this.getAuthHeaders());
     }
 }
 

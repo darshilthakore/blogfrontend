@@ -19,7 +19,15 @@ export class TimelineComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.getBlogs();
+    if ( localStorage.getItem('token') && localStorage.getItem('user')) {
+      //this.global.me = JSON.parse(localStorage.getItem('user'));
+      console.log("im in if cond on timeline.comp.ts")
+      this.getBlogs();
+    } else {
+      console.log("im in else cond on timeline.comp.ts")
+
+      this.router.navigate(['/user']);
+    }
   }
 
   getBlogs() {
