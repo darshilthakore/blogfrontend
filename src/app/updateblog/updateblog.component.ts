@@ -31,6 +31,20 @@ export class UpdateblogComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    var id;
+    this.route.params.subscribe(params => {
+      id = params.id;
+    })
+    console.log("Id", id);
+
+    this.updateblogService.getBlog(id).subscribe( response => {
+      this.blog = response;
+      this.updateblogForm.patchValue({
+        title: response.title,
+        description: response.description,
+        image_url: response.image_url,
+      });
+    });
 
   }
 
@@ -56,14 +70,11 @@ export class UpdateblogComponent implements OnInit {
 
   createForm(): void {
 
-    this.route.params
-    .pipe(switchMap ((params: Params) => {return this.updateblogService.getBlog(params['id']); }))
-    .subscribe( blog => { this.blog = blog; this.blogcopy = blog;});
 
     this.updateblogForm = this.updblg.group({
-      title: [this.blogcopy.title, [Validators.required, Validators.minLength(2), Validators.maxLength(64)] ],
-      description: [this.blogcopy.description, [Validators.required, Validators.minLength(2), Validators.maxLength(300)] ],
-      image_url: [this.blogcopy.image_url,],
+      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(64)] ],
+      description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(300)] ],
+      image_url: ['',],
     });
     
     this.updateblogForm.valueChanges
@@ -85,13 +96,13 @@ export class UpdateblogComponent implements OnInit {
     this.updateblogFormDirective.resetForm();
     var owner = localStorage.getItem('user');
     this.blogcopy['owner'] = owner;
-    this.updateblogService.updateBlog(this.blogcopy.id, this.blogcopy)
+    this.updateblogService.updateBlog(this.blog.id, this.blogcopy)
     .subscribe(
       response => {
         console.log(response);
         // this.registration = registration
         // this.newblogService.mysubject.next("Blog created");
-              
+        this.updateblogService.mysubject.next("Blog updated");
       }
       
     );

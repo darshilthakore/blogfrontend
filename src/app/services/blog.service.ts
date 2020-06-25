@@ -40,7 +40,7 @@ export class BlogService {
     }
 
     updateBlog(id, blog): Observable<Blog> {
-      return this.http.put<Blog>(baseURL + 'api/blogs/' + id, blog, this.getAuthHeaders());
+      return this.http.put<Blog>(baseURL + 'api/blogs/' + id + '/', blog, this.getAuthHeaders());
     }
 }
 
