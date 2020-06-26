@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
   
   }
 
-
+  // registering the new user with User service
   onRegister() {
     this.registration = this.registrationForm.value;
     //console.log(this.registration);

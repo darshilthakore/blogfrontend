@@ -69,7 +69,8 @@ export class LoginComponent implements OnInit {
       this.onValueChanged();
     
     }
-  
+    
+    // logging in the user
     onLogin() {
       this.login = this.loginForm.value;
       // console.log(this.login);
@@ -83,6 +84,8 @@ export class LoginComponent implements OnInit {
       .subscribe(
         response => {
           //console.log("Logging response is:", response);
+
+          // tokens and other parameters are stored in local storage
           localStorage.setItem('token', response['token']);
           localStorage.setItem('user', response['username']);
           localStorage.setItem('dob', response['dob']);

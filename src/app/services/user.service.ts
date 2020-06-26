@@ -15,6 +15,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient) { }
+  
+  // registering the user
 
   registerUser(registration: Registration): Observable<Registration> {
     const httpOptions = {
@@ -26,6 +28,7 @@ export class UserService {
     return this.http.post<Registration>(baseURL + 'api/register/', registration, httpOptions);
   }
 
+  //logging in the user
   loginUser(login: Login): Observable<Login> {
     return this.http.post<Login>(baseURL + 'auth/', login);
   }

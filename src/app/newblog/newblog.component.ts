@@ -65,7 +65,7 @@ export class NewblogComponent implements OnInit {
   
   }
 
-
+  // on clicking the Create Blog button
   createBlog() {
     this.newblog = this.newblogForm.value;
     //console.log(this.newblog);
