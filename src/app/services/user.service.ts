@@ -4,13 +4,17 @@ import { Login } from '../shared/login';
 import { Observable } from 'rxjs';
 import { baseURL } from '../shared/baseurl';
 import { Registration } from '../shared/registration';
+import { map, catchError } from 'rxjs/operators';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient) { }
 
   registerUser(registration: Registration): Observable<Registration> {
     const httpOptions = {

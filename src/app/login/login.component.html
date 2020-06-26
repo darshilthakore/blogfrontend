@@ -1,9 +1,10 @@
+
 <div class="container" fxLayout="column" fxLayoutGap="10px">
     <div fxFlex fxFlexOffset="20px" class="form-size">
         <h3>Login to your Account</h3>
 
         <form novalidate [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onLogin()">
-    
+            
             <p>
                 <mat-form-field class="half-width">
                     <input matInput formControlName="username" placeholder="Username" type="text" required>
@@ -14,8 +15,10 @@
                     <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
                 </mat-form-field>
             </p>
-
             <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="loginForm.invalid">Log In</button>
         </form>
+        <b *ngIf="errMess">Username or Password incorrect.</b>
+
     </div>
 </div>
+

@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  errMess: string;
   loginForm: FormGroup;
   login: Login;
   @ViewChild('lform') loginFormDirective;
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
      ngOnInit(): void {
       if ( localStorage.getItem('token') && localStorage.getItem('username')) {
-        console.log('im in ngOnIniyt condition');
+        // console.log('im in ngOnIniyt condition');
         // this.global.me = JSON.parse(localStorage.getItem('user'));
         this.router.navigate(['/timeline']);
       }
@@ -82,13 +82,15 @@ export class LoginComponent implements OnInit {
       this.loginService.loginUser(this.login)
       .subscribe(
         response => {
-          console.log("Logging response is:", response);
+          //console.log("Logging response is:", response);
           localStorage.setItem('token', response['token']);
           localStorage.setItem('user', response['username']);
+          localStorage.setItem('dob', response['dob']);
           this.router.navigate(['/timeline'])
         },
-        error => {
-          console.log('error', error);
+        errmess => {
+          //console.log(errmess);
+          this.errMess = errmess;
         }
       );
     }

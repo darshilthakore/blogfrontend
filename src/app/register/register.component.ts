@@ -60,6 +60,7 @@ export class RegisterComponent implements OnInit {
     this.registrationForm = this.reg.group({
       username: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       password: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
+      dob: ['',],
       email: ['', [Validators.required, Validators.email]],
     });
     
@@ -73,18 +74,19 @@ export class RegisterComponent implements OnInit {
 
   onRegister() {
     this.registration = this.registrationForm.value;
-    console.log(this.registration);
+    //console.log(this.registration);
     this.registrationForm.reset({
       username: '',
       password: '',
-      email: ''
+      email: '',
+      dob:'',
     });
     this.registrationFormDirective.resetForm();
 
     this.registrationService.registerUser(this.registration)
     .subscribe(
       registration => {
-        console.log(registration);
+        //console.log(registration);
         this.registration = registration
       }
       

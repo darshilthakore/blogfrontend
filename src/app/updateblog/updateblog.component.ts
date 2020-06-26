@@ -13,6 +13,7 @@ import { switchMap, scan } from 'rxjs/operators';
 })
 export class UpdateblogComponent implements OnInit {
 
+  errMess: string;
   updateblogForm: FormGroup;
   blog: Blog;
   blogcopy: Blog;
@@ -35,7 +36,7 @@ export class UpdateblogComponent implements OnInit {
     this.route.params.subscribe(params => {
       id = params.id;
     })
-    console.log("Id", id);
+    //console.log("Id", id);
 
     this.updateblogService.getBlog(id).subscribe( response => {
       this.blog = response;
@@ -87,7 +88,7 @@ export class UpdateblogComponent implements OnInit {
 
   updateBlog() {
     this.blogcopy = this.updateblogForm.value;
-    console.log(this.blogcopy);
+    //console.log(this.blogcopy);
     this.updateblogForm.reset({
       title: '',
       image_url: '',
@@ -99,11 +100,16 @@ export class UpdateblogComponent implements OnInit {
     this.updateblogService.updateBlog(this.blog.id, this.blogcopy)
     .subscribe(
       response => {
-        console.log(response);
+        //console.log(response);
         // this.registration = registration
         // this.newblogService.mysubject.next("Blog created");
         this.updateblogService.mysubject.next("Blog updated");
+      },
+      errmess => {
+        //console.log(errmess);
+        this.errMess = errmess;
       }
+
       
     );
     this.router.navigate(['/timeline']);
@@ -113,9 +119,10 @@ export class UpdateblogComponent implements OnInit {
 
   logoutClicked() {
     // this.global.me = new User();
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('cartid');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('user');
+    // localStorage.removeItem('cartid');
+    localStorage.clear();
     this.router.navigate(['/user']);
   }
 

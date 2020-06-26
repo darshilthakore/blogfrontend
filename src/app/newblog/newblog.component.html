@@ -20,3 +20,4 @@
     </p>
     <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="newblogForm.invalid">Create Blog</button>
 </form>
+<b *ngIf="errMess">Either Server error Or Please make sure URL is in valid format</b>

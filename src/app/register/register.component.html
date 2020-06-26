@@ -16,6 +16,11 @@
             </p>
             <p>
                 <mat-form-field class="full-width">
+                    <input matInput formControlName="dob" placeholder="DOB( 2020-06-26 )" required>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="full-width">
                     <input matInput formControlName="email" placeholder="Email" type="email" required>
                     <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
                 </mat-form-field>

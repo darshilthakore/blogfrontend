@@ -22,7 +22,7 @@ export class TimelineComponent implements OnInit {
     
     if ( localStorage.getItem('token') && localStorage.getItem('user')) {
       //this.global.me = JSON.parse(localStorage.getItem('user'));
-      console.log("im in if cond on timeline.comp.ts")
+      //console.log("im in if cond on timeline.comp.ts")
       this.user = localStorage.getItem('user');
       this.blogService.mysubject.subscribe(
         () => {
@@ -32,7 +32,7 @@ export class TimelineComponent implements OnInit {
       
       this.getBlogs();
     } else {
-      console.log("im in else cond on timeline.comp.ts")
+      //console.log("im in else cond on timeline.comp.ts")
 
       this.router.navigate(['/user']);
     }
@@ -41,7 +41,7 @@ export class TimelineComponent implements OnInit {
   getBlogs() {
     this.blogService.getBlogs().subscribe(
       response => {
-        console.log("Blogs: ", response);
+        //console.log("Blogs: ", response);
         this.blogs = response;
       }
     );
@@ -49,10 +49,10 @@ export class TimelineComponent implements OnInit {
   };
 
   deleteBlog(id) {
-    console.log(id);
+    //console.log(id);
     this.blogService.deleteBlog(id).subscribe(
       response => {
-        console.log(response);
+        //console.log(response);
         this.blogService.mysubject.next('Data changed');
       }
     );
@@ -61,9 +61,10 @@ export class TimelineComponent implements OnInit {
 
   logoutClicked() {
     // this.global.me = new User();
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    localStorage.removeItem('cartid');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('user');
+    // localStorage.removeItem('cartid');
+    localStorage.clear();
     this.router.navigate(['/user']);
   }
 }

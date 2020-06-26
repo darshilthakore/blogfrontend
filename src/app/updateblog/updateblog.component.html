@@ -27,3 +27,5 @@
         <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="updateblogForm.invalid">Update Blog</button>
     </form>
 </div>
+<b *ngIf="errMess">Either Server error Or Please make sure URL is in valid format</b>
+

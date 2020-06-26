@@ -23,11 +23,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { UserService } from './services/user.service';
 import { TimelineComponent } from './timeline/timeline.component';
 import { from } from 'rxjs';
 import { NewblogComponent } from './newblog/newblog.component';
 import { UpdateblogComponent } from './updateblog/updateblog.component';
+
+
+import { UserService } from './services/user.service';
+import { BlogService } from './services/blog.service';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +60,7 @@ import { UpdateblogComponent } from './updateblog/updateblog.component';
   ],
   providers: [
     UserService,
+    BlogService,
     {provide: 'BaseURL', useValue: baseURL},
   ],
   bootstrap: [AppComponent]

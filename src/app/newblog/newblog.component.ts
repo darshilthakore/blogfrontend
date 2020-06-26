@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 })
 export class NewblogComponent implements OnInit {
 
+  errMess: string;
   newblogForm: FormGroup;
   newblog: Blog;
   @ViewChild('blogform') newblogFormDirective;
@@ -67,7 +68,7 @@ export class NewblogComponent implements OnInit {
 
   createBlog() {
     this.newblog = this.newblogForm.value;
-    console.log(this.newblog);
+    //console.log(this.newblog);
     this.newblogForm.reset({
       title: '',
       image_url: '',
@@ -79,10 +80,14 @@ export class NewblogComponent implements OnInit {
     this.newblogService.createBlog(this.newblog)
     .subscribe(
       response => {
-        console.log(response);
+        //console.log(response);
         // this.registration = registration
         this.newblogService.mysubject.next("Blog created");
         
+      },
+      errmess => {
+        //console.log(errmess);
+        this.errMess = errmess;
       }
       
     );
