@@ -11,6 +11,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import { DatePipe } from '@angular/common';
+import {MatNativeDateModule} from '@angular/material/core';
+// import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 import { baseURL } from './shared/baseurl';
 
@@ -57,10 +61,13 @@ import { BlogService } from './services/blog.service';
     MatInputModule,
     FormsModule,
     MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     UserService,
     BlogService,
+    DatePipe,
     {provide: 'BaseURL', useValue: baseURL},
   ],
   bootstrap: [AppComponent]

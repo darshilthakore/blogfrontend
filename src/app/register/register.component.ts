@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Registration } from '../shared/registration';
 import { Params, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, DatePipe } from '@angular/common';
 import { UserService } from '../services/user.service';
 
 
@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(    
     private reg: FormBuilder,
+    private datePipe: DatePipe,
     private registrationService: UserService,
     private route: ActivatedRoute,
     private location: Location,
@@ -74,7 +75,8 @@ export class RegisterComponent implements OnInit {
   // registering the new user with User service
   onRegister() {
     this.registration = this.registrationForm.value;
-    //console.log(this.registration);
+    this.registration.dob = this.datePipe.transform(this.registrationForm.value.dob, 'yyyy-MM-dd');
+    console.log(this.registration);
     this.registrationForm.reset({
       username: '',
       password: '',

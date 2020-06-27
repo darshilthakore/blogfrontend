@@ -12,19 +12,22 @@
     fxLayoutGap="10px">
     <h2>Timeline</h2>
     <div *ngFor="let blog of blogs">
-        <mat-card style="max-width: 50%;">
+        <mat-card style="max-width: 60%;">
                 <mat-card-header>
                     <mat-card-title matLine>{{blog.title}}</mat-card-title>
                     <mat-card-subtitle matLine>by {{blog.owner}}</mat-card-subtitle>
 
                 </mat-card-header>
-                <mat-grid-list cols="3">
+                <mat-card-content style="min-height: fit-content;">
+                    <mat-grid-list rows="2" cols="3">
                     
-                    <mat-grid-tile [rowspan]="1" [colspan]="2">
-                        <img src={{blog.image_url}} alt="image" style="max-width: 100%; max-height: 100%;"> 
-                    </mat-grid-tile>
-                    <mat-grid-tile [rowspan]="1" [colspan]="1" >{{blog.description}}</mat-grid-tile>
-            </mat-grid-list>
+                        <mat-grid-tile [rowspan]="2" [colspan]="2">
+                            <img src={{blog.image_url}} alt="image" style="max-width: 100%; max-height: 100%;"> 
+                        </mat-grid-tile>
+                        <mat-grid-tile [rowspan]="2" [colspan]="1" style="overflow-y: auto;">{{blog.description}}</mat-grid-tile>
+                    </mat-grid-list>
+                </mat-card-content>
+                
             <div *ngIf="user == blog.owner">
                 <button mat-button (click)="deleteBlog(blog.id)">Delete</button><button mat-button [routerLink]="['/update', blog.id]">Update</button>
             </div>

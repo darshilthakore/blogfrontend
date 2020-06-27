@@ -33,7 +33,8 @@ export class NewblogComponent implements OnInit {
 
   formErrors = {
     'title': '',
-    'description': ''
+    'description': '',
+    'image_url': ''
   };
 
   validationMessages = {
@@ -47,6 +48,10 @@ export class NewblogComponent implements OnInit {
       'minlength': 'Description must be at least 2 characters long.',
       'maxlength': 'Description cannot be more than 300 characters long.'
     },
+    'image_url': {
+      'required': 'Image URL is required',
+      'pattern': 'Please enter valid image url'
+    }
   }
 
 
@@ -55,7 +60,7 @@ export class NewblogComponent implements OnInit {
     this.newblogForm = this.newblg.group({
       title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(64)] ],
       description: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(300)] ],
-      image_url: ['',],
+      image_url: ['',[Validators.required, Validators.pattern('(https?:\/\/.*\.(?:png|jpg))')] ],
     });
     
     this.newblogForm.valueChanges

@@ -1,5 +1,5 @@
 .newblog {
-    width: 40%;
+    width: 30%;
     max-height: 80%;
     min-height: 50%;
 
@@ -11,6 +11,10 @@
     overflow-x: hidden;
 }
 
+mat-card {
+
+    overflow-y: auto;
+}
 // .container {
 //     width: 60%;
 // }

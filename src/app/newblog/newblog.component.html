@@ -10,6 +10,7 @@
     <p>
         <mat-form-field class="full-width">
             <input matInput formControlName="image_url" placeholder="Provide an image URL" type="url" required>
+            <mat-error *ngIf="formErrors.image_url">{{formErrors.image_url}}</mat-error>
         </mat-form-field>
     </p>
     <p>
