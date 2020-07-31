@@ -1,7 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from "@angular/material/dialog";
 import { BlogService } from '../services/blog.service';
 import { Blog } from '../shared/blog';
+import { NewblogComponent } from '../newblog/newblog.component';
 
 @Component({
   selector: 'app-timeline',
@@ -16,6 +22,7 @@ export class TimelineComponent implements OnInit {
   constructor(
     private router: Router,
     private blogService: BlogService,
+    private dialog: MatDialog,
     @Inject('BaseURL')public BaseURL) { }
 
   ngOnInit(): void {
@@ -57,6 +64,12 @@ export class TimelineComponent implements OnInit {
       }
     );
     
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(NewblogComponent, {
+      width: "250px"
+    });
   }
 
   logoutClicked() {

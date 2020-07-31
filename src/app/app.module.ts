@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import { DatePipe } from '@angular/common';
+import { MatDialogModule } from "@angular/material/dialog";
 import {MatNativeDateModule} from '@angular/material/core';
 // import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
@@ -63,6 +64,7 @@ import { BlogService } from './services/blog.service';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
   ],
   providers: [
     UserService,

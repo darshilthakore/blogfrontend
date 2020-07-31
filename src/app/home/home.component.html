@@ -1,10 +1,22 @@
 <mat-toolbar color="primary" position="fixed"> <span>My Blog</span>
 </mat-toolbar>
-<mat-grid-list cols="2">
-    <mat-grid-tile>
+<!-- <mat-grid-list cols="2" fxFlexLayout="row">
+    <mat-grid-tile fxFlex="50">
         <app-login></app-login>
     </mat-grid-tile>
-    <mat-grid-tile>
+    <mat-grid-tile fxFlex="50">
         <app-register></app-register>
     </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list> -->
+<div
+    fxLayout="row"
+    fxLayoutAlign="center none"
+    fxLayout.xs="column"
+    fxLayoutAlign.xs=" center">
+    <div fxFlex="50">
+        <app-login></app-login>
+    </div>
+    <div fxFlex="50">
+        <app-register></app-register>
+    </div>
+</div>
